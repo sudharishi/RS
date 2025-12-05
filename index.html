@@ -1,234 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SR FASHION HUB</title>
+<meta charset="UTF-8">
+<title>SR Fashion Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #000;
-        color: gold;
-    }
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #000;
+    color: gold;
+}
 
-    header {
-        background: #111;
-        padding: 15px;
-        text-align: center;
-        font-size: 26px;
-        font-weight: bold;
-        border-bottom: 2px solid gold;
-    }
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-around;
+    background: #111;
+    padding: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid gold;
+    z-index: 10;
+}
+nav button {
+    background: none;
+    border: none;
+    color: gold;
+    font-size: 17px;
+}
 
-    nav {
-        display: flex;
-        justify-content: space-around;
-        padding: 12px;
-        background: #222;
-        position: sticky;
-        top: 0;
-    }
+/* Page System */
+.page { display: none; padding: 20px; }
+.active { display: block; }
 
-    nav a {
-        color: gold;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-    }
+/* Full Screen Home */
+#home { padding: 0; }
+.hero {
+    height: 100vh;
+    background: url('https://i.imgur.com/NEFqZ1y.jpeg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+.btn {
+    padding: 12px 22px;
+    background: gold;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    margin-top: 25px;
+    font-weight: bold;
+    width: 100%;
+}
 
-    .page { display: none; padding: 20px; }
+/* Categories Grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.card {
+    background: #111;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid gold;
+}
 
-    .btn {
-        background: gold;
-        color: black;
-        padding: 10px 20px;
-        border: none;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+/* Login Box */
+.login-box {
+    background: #111;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid gold;
+}
 
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-        border-radius: 5px;
-        border: 2px solid gold;
-        background: #222;
-        color: gold;
-    }
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #222;
+    border: 1px solid gold;
+    color: gold;
+    border-radius: 6px;
+}
 
-    .product-box {
-        background: #111;
-        padding: 15px;
-        margin: 15px 0;
-        border: 1px solid gold;
-        border-radius: 10px;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        border-top: 1px solid gold;
-        margin-top: 40px;
-        background: #111;
-    }
-
+/* Product Card */
+.product {
+    background: #111;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid gold;
+}
 </style>
+
 </head>
 <body>
 
-<header>SR FASHION HUB</header>
-
-<nav>
-    <a onclick="showPage('home')">Home</a>
-    <a onclick="showPage('categories')">Categories</a>
-    <a onclick="showPage('orders')">My Orders</a>
-    <a onclick="showPage('contact')">Contact</a>
-    <a onclick="showPage('login')">Login</a>
-</nav>
-
 <!-- HOME PAGE -->
-<div id="home" class="page">
-    <h2>Welcome to SR FASHION HUB</h2>
-    <p>Premium Black & Gold Shopping Experience</p>
+<div id="home" class="page active">
+    <div class="hero">
+        <h1 style="font-size:40px; text-shadow:0 0 10px #000;">SR FASHION HUB</h1>
+        <p style="font-size:18px;">Premium Black & Gold Shopping Experience</p>
+        <button class="btn" onclick="showPage('categories')">Shop Now</button>
+    </div>
 </div>
 
-<!-- CATEGORIES -->
+<!-- LOGIN PAGE -->
+<div id="login" class="page">
+    <h2>Login</h2>
+    <div class="login-box">
+        <input type="text" id="user" placeholder="Enter Username">
+        <input type="password" id="pass" placeholder="Enter Password">
+        <button class="btn" onclick="login()">Login</button>
+    </div>
+</div>
+
+<!-- CATEGORIES PAGE -->
 <div id="categories" class="page">
     <h2>Categories</h2>
 
-    <div class="product-box">
-        <h3>Men’s Wear</h3>
-        <p>Shirts • Pants • T-Shirts</p>
+    <div class="grid">
+        <div class="card" onclick="openCategory('Men\'s Wear')">Men's Wear</div>
+        <div class="card" onclick="openCategory('Women\'s Wear')">Women's Wear</div>
+        <div class="card" onclick="openCategory('Mobiles')">Mobiles</div>
+        <div class="card" onclick="openCategory('Accessories')">Accessories</div>
+        <div class="card" onclick="openCategory('Footwear')">Footwear</div>
+        <div class="card" onclick="openCategory('Watches')">Watches</div>
     </div>
-
-    <div class="product-box">
-        <h3>Women’s Wear</h3>
-        <p>Tops • Sarees • Kurtis</p>
-    </div>
-
-    <div class="product-box">
-        <h3>Accessories</h3>
-        <p>Belt • Chain • Bracelet • Goggles</p>
-    </div>
-
-    <div class="product-box">
-        <h3>Mobiles</h3>
-        <p>Latest Phones</p>
-    </div>
-
 </div>
 
-<!-- MY ORDERS -->
-<div id="orders" class="page">
-    <h2>Order Form</h2>
+<!-- PRODUCT CATEGORY TEMPLATE -->
+<div id="products" class="page">
+    <h2 id="catTitle"></h2>
 
-    <form action="mailto:srfashionhub99@gmail.com" method="POST" enctype="text/plain">
+    <!-- Sample Product -->
+    <div class="product">
+        <img src="https://i.imgur.com/Kg7t3h0.jpeg" width="100%">
+        <h3>Sample Product</h3>
+        <p>₹499</p>
+        <button class="btn" onclick="order('Sample Product')">Buy Now</button>
+    </div>
+</div>
 
+<!-- ORDER FORM -->
+<div id="orderPage" class="page">
+    <h2>Order Details</h2>
+
+    <form id="orderForm" action="mailto:srfashionhub99@gmail.com" method="POST" enctype="text/plain">
+        
         <label>Name</label>
-        <input type="text" name="name" required>
+        <input name="name" required>
 
         <label>Phone</label>
-        <input type="text" name="phone" required>
+        <input name="phone" required>
 
         <label>Address</label>
         <textarea name="address" required></textarea>
 
         <label>Pincode</label>
-        <input type="number" name="pincode" required>
+        <input name="pincode" required>
 
         <label>Product Name</label>
-        <input type="text" name="product" required>
+        <input id="pName" name="product" readonly>
 
         <label>Quantity</label>
-        <input type="number" name="qty" required>
+        <input name="qty" value="1" required>
 
-        <h3>Payment Method</h3>
-        <p>UPI QR Payment Available</p>
+        <h3>Payment Options</h3>
 
-        <button class="btn">Place Order</button>
+        <!-- UPI Payment Button -->
+        <a href="upi://pay?pa=9966016696@ybl&pn=SR%20FASHION%20HUB&cu=INR" 
+           class="btn">Pay Using UPI</a>
 
+        <!-- COD Button -->
+        <button class="btn" type="submit">Cash On Delivery</button>
     </form>
 </div>
 
-<!-- CONTACT -->
-<div id="contact" class="page">
-    <h2>Contact Us</h2>
-
-    <p><b>Phone:</b> 9966016696</p>
-    <p><b>Email:</b> srfashionhub99@gmail.com</p>
-    <p><b>Instagram:</b> @srfashionhub_sr</p>
-
+<!-- MY ORDERS -->
+<div id="orders" class="page">
+    <h2>My Orders</h2>
+    <p>No orders yet.</p>
 </div>
 
-<!-- LOGIN -->
-<div id="login" class="page">
-    <h2>Login</h2>
-
-    <input type="text" id="loginPhone" placeholder="Phone Number">
-    <input type="password" id="loginPass" placeholder="Password">
-
-    <button class="btn" onclick="login()">Login</button>
-
-    <p style="margin-top:20px;">Don't have an account?</p>
-    <button class="btn" onclick="showPage('signup')">Signup</button>
-</div>
-
-<!-- SIGNUP -->
-<div id="signup" class="page">
-    <h2>Create Account</h2>
-
-    <input type="text" id="regName" placeholder="Full Name">
-    <input type="text" id="regPhone" placeholder="Phone Number">
-    <input type="password" id="regPass" placeholder="Password">
-
-    <button class="btn" onclick="signup()">Signup</button>
-</div>
-
-<footer>
-    © 2025 SR FASHION HUB — Premium Black & Gold Store
-</footer>
+<!-- Navigation Bar -->
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('categories')">Categories</button>
+    <button onclick="showPage('orders')">My Orders</button>
+    <button onclick="showPage('login')">Login</button>
+</nav>
 
 <script>
-function showPage(id) {
-    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-    document.getElementById(id).style.display = "block";
-}
-showPage('home');
-
-// SIGNUP SAVE
-function signup() {
-    let name = document.getElementById("regName").value;
-    let phone = document.getElementById("regPhone").value;
-    let pass = document.getElementById("regPass").value;
-
-    localStorage.setItem("userName", name);
-    localStorage.setItem("userPhone", phone);
-    localStorage.setItem("userPass", pass);
-
-    alert("Account Created Successfully!");
-    showPage('login');
+function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(page).classList.add('active');
 }
 
-// LOGIN CHECK
 function login() {
-    let phone = document.getElementById("loginPhone").value;
-    let pass = document.getElementById("loginPass").value;
+    showPage('home');
+}
 
-    let sPhone = localStorage.getItem("userPhone");
-    let sPass = localStorage.getItem("userPass");
+function openCategory(cat) {
+    document.getElementById("catTitle").innerText = cat;
+    showPage("products");
+}
 
-    if (phone === sPhone && pass === sPass) {
-        alert("Login Successful!");
-        showPage('home');
-    } else {
-        alert("Incorrect Details!");
-    }
+function order(name) {
+    document.getElementById("pName").value = name;
+    showPage("orderPage");
 }
 </script>
 
 </body>
-  </html>
+    </html>
